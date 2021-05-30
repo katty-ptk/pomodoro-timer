@@ -5,8 +5,11 @@
     transform: translate(-50%, -50%);
     width: 500px;
     height: 500px;
-    border: 1px solid $border;
+    border: 5px solid $border;
     border-radius: 100%;
+    background: url(../bg-image.jpg) no-repeat;
+    background-size: 100% auto;    
+    
 
     .timer {
         position: absolute;
@@ -16,7 +19,7 @@
         text-align: center;
 
         h2 {
-            font-size: 3em;
+            font-size: 4em;
         }
 
         .actions {
@@ -29,7 +32,7 @@
                 border: none;
                 color: $pink;
                 font-weight: bold;
-                font-size: 1.2em;
+                font-size: 2em;
                 font-family: 'Lora', serif;
                 cursor: pointer;
                 transition: 0.3s all ease-in;
