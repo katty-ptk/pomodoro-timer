@@ -5,6 +5,18 @@
 
 body {
     background: $bgColor;
-    color: $white;
+    color: $text;
     font-family: 'Lora', serif;
+}
+
+@media screen and ( max-width: 1000px ) {
+    body {
+        background: url(../bg-image.jpg) no-repeat;
+
+        .container {
+            background: transparent;
+            border: none;
+        }
+    
+    }
 }

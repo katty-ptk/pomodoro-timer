@@ -4,11 +4,20 @@
 }
 
 body {
-  background: #111;
-  color: #d6d6d6;
+  background: #c2a48a;
+  color: #cf52bf;
   font-family: "Lora", serif;
 }
 
+@media screen and (max-width: 1000px) {
+  body {
+    background: url(../bg-image.jpg) no-repeat;
+  }
+  body .container {
+    background: transparent;
+    border: none;
+  }
+}
 .container {
   position: absolute;
   top: 50%;
@@ -16,8 +25,10 @@ body {
   transform: translate(-50%, -50%);
   width: 500px;
   height: 500px;
-  border: 1px solid #999191;
+  border: 5px solid #999191;
   border-radius: 100%;
+  background: url(../bg-image.jpg) no-repeat;
+  background-size: 100% auto;
 }
 .container .timer {
   position: absolute;
@@ -27,7 +38,7 @@ body {
   text-align: center;
 }
 .container .timer h2 {
-  font-size: 3em;
+  font-size: 4em;
 }
 .container .timer .actions {
   margin-top: 30px;
@@ -39,7 +50,7 @@ body {
   border: none;
   color: #c08cb9;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 2em;
   font-family: "Lora", serif;
   cursor: pointer;
   transition: 0.3s all ease-in;

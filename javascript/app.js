@@ -2,18 +2,26 @@
 const STUDY_TIME = 10;
 const BREAK_TIME = 5;
 
-let time_left = convertSeconds(STUDY_TIME);
+let time_left = STUDY_TIME;
 let counter = 0;
-let timer_interval = -1;    // the timer is paused
-let study_interval;
+let interval = -1;    // the timer is paused
 
 const ding = new Audio();
 ding.src = "../ding.mp3";
 
 const timer = document.getElementById('time-left');
-timer.innerHTML = time_left;
+timer.innerHTML = convertSeconds(time_left);
 
 const start_pause = document.querySelector('.start');
+start_pause.addEventListener('click', function() {
+    startPauseTimer();
+
+    if ( this.innerHTML == "Start" ) {
+        this.innerHTML = "Pause";
+    } else {
+        this.innerHTML = "Start";
+    }
+});
 
 
 // FUNCTIONS
@@ -33,20 +41,52 @@ function convertSeconds(sec) {
     }
 }   // converts seconds into minutes
 
-$('.start').click(() => {
-    study_interval = setInterval( studyTime, 1000 );
-});
+function startPauseTimer() {
+    if ( interval != -1 ) {
+        pauseInterval();
+    } else {
+        updateInterval();
+    }
+}
 
-function studyTime() {
-    start_pause.innerHTML = "Pause";
-    time_left = STUDY_TIME; // 30 : 00
-    timer.innerHTML = convertSeconds(time_left - counter);
+function pauseInterval() {
+    clearInterval( interval );
+    interval = -1;
+}
+
+function updateInterval() {
+    if ( time_left == STUDY_TIME ) {
+        studyInterval();
+    } else {
+        breakInterval();
+    }
+}
+
+function studyInterval() {
+    interval = setInterval( studyTime, 1000 );
+}
+
+function breakInterval() {
+    interval = setInterval( breakTime, 1000 );
+}
+
+function startTimer( callback, time_left_value ) {
+    time_left = time_left_value; // 30 : 00
+    timer.innerHTML = convertSeconds( time_left - counter );
     counter += 1;
 
     if ( time_left == counter ) {   // 00 : 00
-        ding.play();
-        clearInterval(study_interval);  // pauses timer
-        timer.innerHTML = "00 : 00";
-        start_pause.innerHTML = "Start";
+        // ding.play();
+        clearInterval( interval );
+        counter = 0;
+        callback();
     }
+}
+
+function studyTime() {
+    startTimer( breakInterval, STUDY_TIME );
+}
+
+function breakTime() {
+    startTimer( studyInterval, BREAK_TIME );
 }
