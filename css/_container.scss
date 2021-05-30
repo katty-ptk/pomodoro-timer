@@ -32,6 +32,11 @@
                 font-size: 1.2em;
                 font-family: 'Lora', serif;
                 cursor: pointer;
+                transition: 0.3s all ease-in;
+
+                &:hover {
+                    color: $btn-hover;
+                }
             }
         }
     }
